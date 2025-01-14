@@ -4,3 +4,4 @@ reth-data
 rethlogs
 jwt.hex
 .env
+.idea
