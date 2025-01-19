@@ -11,11 +11,3 @@ RUN git clone https://github.com/paradigmxyz/reth && \
     cd reth && \
     cargo build --release
 
-# Copy entrypoint script
-COPY entrypoint.sh /entrypoint.sh
-
-# Make the script executable
-RUN chmod +x /entrypoint.sh
-
-# Set the entrypoint
-CMD ["/entrypoint.sh"]
