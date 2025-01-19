@@ -5,8 +5,8 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - ./reth-data:/data
-      - ./rethlogs:/rethlogs
+      - execution-data:/data
+      - executionlogs:/rethlogs
       - ./jwt.hex:/jwt.hex
     ports:
       - '8545:8545'
@@ -29,8 +29,7 @@ services:
       - "5052:5052"     # HTTP API
       - "9100:9100"     # Consensus metrics
     volumes:
-      - ./lighthouse-data:/data
-      - ./validator_keys:/keys
+      - lighthouse-data:/data
       - ./jwt.hex:/jwt.hex
     depends_on:
       execution:
@@ -51,3 +50,44 @@ services:
       --metrics-port 9100
       --port 9000
 
+  # Observability metrics
+  prometheus:
+    restart: always
+    image: prom/prometheus
+    user: root
+    depends_on:
+      - consensus
+    ports:
+      - 9090:9090
+    volumes:
+      - ./prometheus/:/etc/prometheus/
+      - prometheusdata:/prometheusdata
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheusdata'
+
+  grafana:
+    restart: always
+    image: grafana/grafana
+    user: '472'
+    depends_on:
+      - consensus
+      - prometheus
+    ports:
+      - 3000:3000
+    volumes:
+      - grafanadata:/var/lib/grafanadata
+      - ./grafana/provisioning/:/etc/grafana/provisioning/
+
+
+volumes:
+  execution-data:
+    driver: local
+  executionlogs:
+    driver: local
+  lighthouse-data:
+    driver: local
+  prometheusdata:
+    driver: local
+  grafanadata:
+    driver: local

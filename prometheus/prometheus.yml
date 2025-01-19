@@ -1,0 +1,17 @@
+  global:
+    scrape_interval: 15s
+    evaluation_interval: 15s
+
+  scrape_configs:
+    - job_name: 'execution'
+      static_configs:
+        - targets: [ 'execution:9001' ]
+          labels:
+            client: 'reth'
+
+    - job_name: 'consensus'
+      static_configs:
+        - targets: [ 'consensus:9100' ]
+          labels:
+            client: 'lighthouse'
+
