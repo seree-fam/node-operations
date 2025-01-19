@@ -1,0 +1,21 @@
+services:
+  validator:
+    image: sigp/lighthouse:latest
+    container_name: lighthouse-validator
+    restart: unless-stopped
+    ports:
+      - "9101:9101"     # Validator metrics
+    volumes:
+      - ./lighthouse-data:/data
+      - ./validator_keys:/keys
+    depends_on:
+      - consensus
+    command: >
+      lighthouse vc
+      --network sepolia
+      --beacon-nodes http://consensus:5052
+      --metrics
+      --metrics-address 0.0.0.0
+      --metrics-port 9101
+      --graffiti "Sereé"
+      --suggested-fee-recipient 0x0000000000000000000000000000000000000000

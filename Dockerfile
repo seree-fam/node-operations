@@ -11,5 +11,11 @@ RUN git clone https://github.com/paradigmxyz/reth && \
     cd reth && \
     cargo build --release
 
-# Keep container alive (will be overridden by docker-compose command)
-CMD ["tail", "-f", "/dev/null"]
+# Copy entrypoint script
+COPY entrypoint.sh /entrypoint.sh
+
+# Make the script executable
+RUN chmod +x /entrypoint.sh
+
+# Set the entrypoint
+ENTRYPOINT ["/entrypoint.sh"]

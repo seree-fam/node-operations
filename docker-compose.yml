@@ -4,31 +4,21 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    env_file:
-      - .env
     volumes:
       - ./reth-data:/data
       - ./rethlogs:/rethlogs
       - ./jwt.hex:/jwt.hex
-    command: >
-      ./reth/target/release/reth node
-      --chain sepolia
-      --datadir /data
-      --http
-      --http.addr 0.0.0.0
-      --http.port 8545
-      --ws
-      --ws.addr 0.0.0.0
-      --ws.port 8546
-      --metrics 0.0.0.0:9001
-      --authrpc.jwtsecret /jwt.hex
-      --authrpc.addr 0.0.0.0
-      --authrpc.port 8551
     ports:
       - '8545:8545'
       - '8546:8546'
       - '8551:8551'
       - '9001:9001'  # Execution metrics
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8545", "-X", "POST", "-H", "Content-Type: application/json", "--data", '{"jsonrpc":"2.0","method":"eth_syncing","params":[],"id":1}' ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
 
   consensus:
     image: sigp/lighthouse:latest
@@ -43,7 +33,10 @@ services:
       - ./validator_keys:/keys
       - ./jwt.hex:/jwt.hex
     depends_on:
-      - execution
+      execution:
+        condition:
+          service_healthy
+
     command: >
       lighthouse bn
       --network sepolia
@@ -58,23 +51,3 @@ services:
       --metrics-port 9100
       --port 9000
 
-  validator:
-    image: sigp/lighthouse:latest
-    container_name: lighthouse-validator
-    restart: unless-stopped
-    ports:
-      - "9101:9101"     # Validator metrics
-    volumes:
-      - ./lighthouse-data:/data
-      - ./validator_keys:/keys
-    depends_on:
-      - consensus
-    command: >
-      lighthouse vc
-      --network sepolia
-      --beacon-nodes http://consensus:5052
-      --metrics
-      --metrics-address 0.0.0.0
-      --metrics-port 9101
-      --graffiti "Sereé"
-      --suggested-fee-recipient 0x0000000000000000000000000000000000000000
