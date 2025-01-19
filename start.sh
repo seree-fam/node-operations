@@ -12,5 +12,5 @@ fi
 #  permissions
 chmod 644 jwt.hex
 
-docker compose up -d --build
+sudo docker compose up -d --build
 
