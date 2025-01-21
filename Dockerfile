@@ -13,8 +13,3 @@ RUN git clone https://github.com/paradigmxyz/reth && \
     cd reth && \
     cargo build --release
 
-
-COPY ./start.sh /start.sh
-RUN chmod +x /start.sh
-
-CMD /start.sh
