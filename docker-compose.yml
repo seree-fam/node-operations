@@ -8,6 +8,7 @@ services:
       - execution-data:/data
       - executionlogs:/rethlogs
       - ./jwt.hex:/jwt.hex
+      - ./start.sh:/start.sh
     ports:
       - '8545:8545'
       - '8546:8546'
