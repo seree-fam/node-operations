@@ -49,26 +49,19 @@ services:
           service_healthy
     command: >
       lighthouse bn
-      --network sepolia
-      --datadir /data
-      --execution-endpoint http://execution:8551
-      --execution-jwt /jwt.hex
-      --checkpoint-sync-url https://sepolia.beaconstate.info
-      --http
-      --http-address 0.0.0.0
-      --metrics
-      --metrics-address 0.0.0.0
-      --metrics-port 9100
-      --port 9000
-      --boot-nodes "enr:-Ly4QFoZTWR8ulxGVGk1ib2sM8un9yok7j-hjRqFLOCJj6BOkBrqFQasJ0JpoY0_KIJvR8hT6TCd-dH-kQpk16WsH0wBh2F0dG5ldHOIAAAAAAAAAACEZXRoMpCC9KcrAgAQIP__________gmlkgnY0gmlwhBLY-NyJc2VjcDI1NmsxoQI0gujXac9rMAb48NtMqtSTyHIeNYlpjr5LkPL98RkHFYN0Y3CCIyiDdWRwgiMo,enr:-L64QN4rmBasBKRUwE6-IJENU0QGUF4YnHXTzaicaXxXHyO6hEjmllkSHOXdzTH1QwFWiZc7-LiEVM-vugHz4NO-MSoBh2F0dG5ldHOIAAAAAAAAAACEZXRoMpCC9KcrAgAQIP__________gmlkgnY0gmlwhBLY-NyJc2VjcDI1NmsxoQImMz5UXxN6JDY4AqnGTRKIgO6P_sQrF_GeGIaxJhEJEYN0Y3CCIyiDdWRwgiMo"
-      --target-peers 50
-      --subscribe-all-subnets
-      --import-all-attestations
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "3"
+        --network sepolia
+        --datadir /data
+        --execution-endpoint http://execution:8551
+        --execution-jwt /jwt.hex
+        --checkpoint-sync-url https://sepolia.beaconstate.info
+        --http
+        --http-address 0.0.0.0
+        --metrics
+        --metrics-address 0.0.0.0
+        --metrics-port 9100
+        --port 9000
+        --target-peers 50
+        --boot-nodes "enr:-Jq4QItoFUuug_n_qbYbU0OY04-np2wT8rUCauOOXNi0tDZ9_cKTN6Ky_pPRi7L9qZuHky8PWh4ktD9YkpgAsiuBAoGCIYnYh2F0dG5ldHOIAAAAAAAAAACEZXRoMpCCsf-qBQECIP__________gmlkgnY0gmlwhAPedBiJc2VjcDI1NmsxoQJUBJt3iPhGBh5w_1ogMGPBtY2KXjzzN78UkwK5vP2uloN0Y3CCIyiDdWRwgiMo,enr:-Jq4QOw_RtjKxkFTXwuqBBx8wuyrVaUYV66kBAGcw0z88mw0UCuFQ8fEsqQlK6P5vR_ZQjLZTFJXkXrUVviAx63hUFOCIYnYh2F0dG5ldHOIAAAAAAAAAACEZXRoMpCCsf-qBQECIP__________gmlkgnY0gmlwhBLCK1SJc2VjcDI1NmsxoQK1v_S1LmqGgHh6n_RlX6D4dXHQH-5ZvgwaTM3gUP3W1oN0Y3CCIyiDdWRwgiMo"
 
   # Observability metrics
   prometheus:
