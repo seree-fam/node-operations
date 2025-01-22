@@ -60,6 +60,7 @@ services:
       --metrics-address 0.0.0.0
       --metrics-port 9100
       --port 9000
+      --boot-nodes "enr:-LK4QH1xnjotgXwg25IDPjrqRGFnH1ScgNHA3dv1Z8xHCp4uP3N3Jjl_aYv_WIxQRdwZvSukzbwX5ABkPP-A898Bx5EBh2F0dG5ldHOIAAAAAAAAAACEZXRoMpB53wQoAAAQIP__________gmlkgnY0gmlwhIe1te-Jc2VjcDI1NmsxoQOkcGXqbCJYbcClZ3z5f6NWhX_1YPFRYRRWQpJjwSHpVIN0Y3CCIyiDdWRwgiMo,enr:-Ku4QFmUkNp0g9bsLX2PfVeIyT-9WO-PZlrqZBNtEyofHyPjvwvqRDXzrjs9EsgPCA3lHOctkp1aj0QhdpznngYNAgmFh2F0dG5ldHOIAAAAAAAAAACEZXRoMpB53wQoAAAQIP__________gmlkgnY0gmlwhKh3jPWJc2VjcDI1NmsxoQKR8NpKvpOqJZPeDBYeYJjKWaZKJDA0qD1NXjf9fJ1SjoN0Y3CCIyiDdWRwgiMo"
 
   # Observability metrics
   prometheus:
