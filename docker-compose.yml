@@ -34,7 +34,7 @@ services:
   consensus:
     image: sigp/lighthouse:latest
     container_name: lighthouse-sepolia
-    restart: unless-stopped
+    restart: always
     ports:
       - "9000:9000"     # P2P port
       - "5052:5052"     # HTTP API
