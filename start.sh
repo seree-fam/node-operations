@@ -6,6 +6,11 @@ if [ ! "$(ls -A /data)" ]; then
     wget -q -O - https://snapshots.publicnode.com/ethereum-sepolia-reth-archive-7319545.tar.lz4 | lz4 -d | tar -x -C /data
 fi
 
+echo "################### LFG ################!"
+cat /jwt.hex
+echo "################### **** ################!"
+
+
 # Start reth node
 exec ./reth/target/release/reth node \
     --chain sepolia \
