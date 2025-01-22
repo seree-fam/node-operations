@@ -36,17 +36,17 @@ services:
     container_name: lighthouse-sepolia
     restart: always
     ports:
-      - "9000:9000"     # P2P port
-      - "5052:5052"     # HTTP API
-      - "9100:9100"     # Consensus metrics
+      - "9000:9000/tcp"     # P2P TCP
+      - "9000:9000/udp"     # P2P UDP
+      - "5052:5052"         # HTTP API
+      - "9100:9100"         # Consensus metrics
     volumes:
       - lighthouse-data:/data
-      - ./jwt.hex:/jwt.hex
+      - ./jwt.hex:/jwt.hex:ro  # Added read-only flag
     depends_on:
       execution:
         condition:
           service_healthy
-
     command: >
       lighthouse bn
       --network sepolia
@@ -60,7 +60,15 @@ services:
       --metrics-address 0.0.0.0
       --metrics-port 9100
       --port 9000
-      --boot-nodes "enr:-LK4QH1xnjotgXwg25IDPjrqRGFnH1ScgNHA3dv1Z8xHCp4uP3N3Jjl_aYv_WIxQRdwZvSukzbwX5ABkPP-A898Bx5EBh2F0dG5ldHOIAAAAAAAAAACEZXRoMpB53wQoAAAQIP__________gmlkgnY0gmlwhIe1te-Jc2VjcDI1NmsxoQOkcGXqbCJYbcClZ3z5f6NWhX_1YPFRYRRWQpJjwSHpVIN0Y3CCIyiDdWRwgiMo,enr:-Ku4QFmUkNp0g9bsLX2PfVeIyT-9WO-PZlrqZBNtEyofHyPjvwvqRDXzrjs9EsgPCA3lHOctkp1aj0QhdpznngYNAgmFh2F0dG5ldHOIAAAAAAAAAACEZXRoMpB53wQoAAAQIP__________gmlkgnY0gmlwhKh3jPWJc2VjcDI1NmsxoQKR8NpKvpOqJZPeDBYeYJjKWaZKJDA0qD1NXjf9fJ1SjoN0Y3CCIyiDdWRwgiMo"
+      --boot-nodes "enr:-Ly4QFoZTWR8ulxGVGk1ib2sM8un9yok7j-hjRqFLOCJj6BOkBrqFQasJ0JpoY0_KIJvR8hT6TCd-dH-kQpk16WsH0wBh2F0dG5ldHOIAAAAAAAAAACEZXRoMpCC9KcrAgAQIP__________gmlkgnY0gmlwhBLY-NyJc2VjcDI1NmsxoQI0gujXac9rMAb48NtMqtSTyHIeNYlpjr5LkPL98RkHFYN0Y3CCIyiDdWRwgiMo,enr:-L64QN4rmBasBKRUwE6-IJENU0QGUF4YnHXTzaicaXxXHyO6hEjmllkSHOXdzTH1QwFWiZc7-LiEVM-vugHz4NO-MSoBh2F0dG5ldHOIAAAAAAAAAACEZXRoMpCC9KcrAgAQIP__________gmlkgnY0gmlwhBLY-NyJc2VjcDI1NmsxoQImMz5UXxN6JDY4AqnGTRKIgO6P_sQrF_GeGIaxJhEJEYN0Y3CCIyiDdWRwgiMo"
+      --target-peers 50
+      --subscribe-all-subnets
+      --import-all-attestations
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
   # Observability metrics
   prometheus:
