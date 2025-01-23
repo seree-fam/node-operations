@@ -61,7 +61,7 @@ services:
         --metrics-port 9100
         --port 9000
         --target-peers 50
-        --boot-nodes "enr:-Jq4QItoFUuug_n_qbYbU0OY04-np2wT8rUCauOOXNi0tDZ9_cKTN6Ky_pPRi7L9qZuHky8PWh4ktD9YkpgAsiuBAoGCIYnYh2F0dG5ldHOIAAAAAAAAAACEZXRoMpCCsf-qBQECIP__________gmlkgnY0gmlwhAPedBiJc2VjcDI1NmsxoQJUBJt3iPhGBh5w_1ogMGPBtY2KXjzzN78UkwK5vP2uloN0Y3CCIyiDdWRwgiMo,enr:-Jq4QOw_RtjKxkFTXwuqBBx8wuyrVaUYV66kBAGcw0z88mw0UCuFQ8fEsqQlK6P5vR_ZQjLZTFJXkXrUVviAx63hUFOCIYnYh2F0dG5ldHOIAAAAAAAAAACEZXRoMpCCsf-qBQECIP__________gmlkgnY0gmlwhBLCK1SJc2VjcDI1NmsxoQK1v_S1LmqGgHh6n_RlX6D4dXHQH-5ZvgwaTM3gUP3W1oN0Y3CCIyiDdWRwgiMo"
+        
 
   # Observability metrics
   prometheus:
