@@ -40,6 +40,7 @@ services:
       - "9000:9000/udp"     # P2P UDP
       - "5052:5052"         # HTTP API
       - "9100:9100"         # Consensus metrics
+      - "5064:5064"
     volumes:
       - lighthouse-data:/data
       - ./jwt.hex:/jwt.hex:ro  # Added read-only flag
